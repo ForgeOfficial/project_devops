@@ -2,6 +2,7 @@
 const todoForm = document.getElementById('todo-form');
 const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
+const numberTaskElement = document.getElementById('number-task');
 
 // Event Listeners
 todoForm.addEventListener('submit', addTodo);
@@ -26,6 +27,7 @@ function addTodo(event) {
 
   // Add the new task to the list
   todoList.appendChild(listItem);
+  numberTaskElement.innerText = todoList.children.length.toString();
 
   // Clear the input field
   todoInput.value = '';
