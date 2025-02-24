@@ -48,6 +48,13 @@ button:hover {
     background-color: #4cae4c;
 }
 
+span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
 ul {
     list-style: none;
     padding: 0;
@@ -67,6 +74,10 @@ li {
 .completed {
     text-decoration: line-through;
     color: gray;
+}
+
+button.complete {
+    padding: 5px 10px;
 }
 
 button.delete {
