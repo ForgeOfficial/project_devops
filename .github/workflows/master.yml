@@ -25,6 +25,10 @@ jobs:
         run: npm run test
   deploy:
     needs: test
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
     environment:
       name: github-pages
