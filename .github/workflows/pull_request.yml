@@ -31,11 +31,22 @@ jobs:
           FUNCTIONS=$(jq '.total.functions.pct' coverage/coverage-summary.json)
           BRANCHES=$(jq '.total.branches.pct' coverage/coverage-summary.json)
           
-          echo "Lines: ${LINES}% Statements: ${STATEMENTS}% Functions: ${FUNCTIONS}% Banches: ${BRANCHES}%" > coverage_comment.txt
+          echo "COVERAGE_REPORT=Lines: ${LINES}% Statements: ${STATEMENTS}% Functions: ${FUNCTIONS}% Banches: ${BRANCHES}%"  >> $GITHUB_ENV
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v3
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Build output
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
         with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
-          body-file: coverage_comment.txt
+          body: |
+            ## Jest coverage repport
+            ${{ env.COVERAGE_REPORT }}
           edit-mode: replace
