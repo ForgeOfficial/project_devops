@@ -32,3 +32,10 @@ jobs:
           BRANCHES=$(jq '.total.branches.pct' coverage/coverage-summary.json)
           
           echo "Lines: ${LINES}% Statements: ${STATEMENTS}% Functions: ${FUNCTIONS}% Banches: ${BRANCHES}%" > coverage_comment.txt
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-file: coverage_comment.txt
+          edit-mode: replace
