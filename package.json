@@ -7,6 +7,12 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json-summary"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
